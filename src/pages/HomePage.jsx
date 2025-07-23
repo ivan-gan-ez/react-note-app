@@ -23,12 +23,12 @@ function HomePage() {
     <>
       <Container maxWidth="md" sx={{ p: "30px" }}>
         <Box sx={{ display: "flex", justifyContent: "space-between" }}>
-          <Typography variant="h3" sx={{ pb: "20px" }}>
+          <Typography variant="h3" sx={{ pb: 4 }}>
             All Notes (3)
           </Typography>
 
-          <Box>
-            <FormControl sx={{ minWidth: "150px", ml: "20px" }}>
+          <Box sx={{ display: "flex" }}>
+            <FormControl sx={{ minWidth: "120px", ml: "20px" }}>
               <InputLabel id="category_label">Category</InputLabel>
               <Select labelId="category_label" id="category" label="Category">
                 <MenuItem value={"all"}>All Categories</MenuItem>
@@ -38,7 +38,7 @@ function HomePage() {
               </Select>
             </FormControl>
 
-            <FormControl sx={{ minWidth: "150px", ml: "20px" }}>
+            <FormControl sx={{ minWidth: "120px", ml: "20px" }}>
               <InputLabel id="sort_label">Sort By</InputLabel>
               <Select labelId="sort_label" id="sort" label="Sort By">
                 <MenuItem value={"latest"}>Last Updated</MenuItem>
@@ -51,7 +51,7 @@ function HomePage() {
         <Box sx={{ display: "inline" }}>
           <Grid container spacing={2}>
             {/* card 1 */}
-            <Grid size={4}>
+            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
               <Card>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -59,7 +59,7 @@ function HomePage() {
                   </Typography>
                   <Chip label="Ideas" sx={{ mb: "10px" }} />
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    date
+                    {new Date().toISOString()}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -74,8 +74,8 @@ function HomePage() {
             </Grid>
             {/* card 1 end*/}
 
-            {/* card 1 */}
-            <Grid size={4}>
+            {/* card 2 */}
+            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
               <Card>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -83,7 +83,7 @@ function HomePage() {
                   </Typography>
                   <Chip label="Personal" sx={{ mb: "10px" }} />
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    date
+                    {new Date().toISOString()}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -96,10 +96,10 @@ function HomePage() {
                 </CardActions>
               </Card>
             </Grid>
-            {/* card 1 end*/}
+            {/* card 2 end*/}
 
-            {/* card 1 */}
-            <Grid size={4}>
+            {/* card 3 */}
+            <Grid size={{ xs: 12, md: 6, lg: 4 }}>
               <Card>
                 <CardContent>
                   <Typography gutterBottom variant="h5" component="div">
@@ -107,7 +107,7 @@ function HomePage() {
                   </Typography>
                   <Chip label="Work" sx={{ mb: "10px" }} />
                   <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                    date
+                    {new Date().toISOString()}
                   </Typography>
                 </CardContent>
                 <CardActions>
@@ -120,7 +120,7 @@ function HomePage() {
                 </CardActions>
               </Card>
             </Grid>
-            {/* card 1 end*/}
+            {/* card 3 end*/}
           </Grid>
         </Box>
       </Container>

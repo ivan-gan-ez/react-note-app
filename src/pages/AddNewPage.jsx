@@ -14,11 +14,47 @@ import {
 import Editor from "react-simple-wysiwyg";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router";
+import { nanoid } from "nanoid";
+import { toast } from "sonner";
 
 function AddNewPage() {
+  const categoriesInLocalStorage = localStorage.getItem("categories");
+  const [categories, setCategories] = useState(
+    categoriesInLocalStorage ? JSON.parse(categoriesInLocalStorage) : []
+  );
+
+  const notesInLocalStorage = localStorage.getItem("notes");
+  const [notes, setNotes] = useState(
+    notesInLocalStorage ? JSON.parse(notesInLocalStorage) : []
+  );
+
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("");
   const [content, setContent] = useState("");
+
+  const handleAddNew = () => {
+    if (title === "" || category === "" || content === "") {
+      toast("One or more fields are empty.");
+    } else {
+      const updatedNotes = [
+        ...notes,
+        {
+          id: nanoid(),
+          title: title,
+          category: category, //line may be broken
+          content: content,
+          updatedAt: new Date().valueOf(),
+        },
+      ];
+      setNotes(updatedNotes);
+
+      localStorage.setItem("notes", JSON.stringify(updatedNotes));
+      setTitle("");
+      setCategory("");
+      setContent("");
+      toast(`Note "${title}" successfully added!`);
+    }
+  };
 
   function onChange(e) {
     setContent(e.target.value);
@@ -46,17 +82,9 @@ function AddNewPage() {
             value={category}
             onChange={(event) => setCategory(event.target.value)}
           >
-            <MenuItem value={1}>Alkali Metal</MenuItem>
-            <MenuItem value={2}>Alkaline Earth Metal</MenuItem>
-            <MenuItem value={3}>Transition Metal</MenuItem>
-            <MenuItem value={4}>Lanthanide</MenuItem>
-            <MenuItem value={5}>Actinide</MenuItem>
-            <MenuItem value={6}>Post-Transition Metal</MenuItem>
-            <MenuItem value={7}>Metalloid</MenuItem>
-            <MenuItem value={8}>Non-Metal</MenuItem>
-            <MenuItem value={9}>Halogen</MenuItem>
-            <MenuItem value={10}>Noble Gas</MenuItem>
-            <MenuItem value={0}>Unknown</MenuItem>
+            {categories.map((category) => (
+              <MenuItem value={category.id}>{category.label}</MenuItem>
+            ))}
           </Select>
         </FormControl>
 
@@ -81,7 +109,7 @@ function AddNewPage() {
             mt: "20px",
           }}
         >
-          <Button color="primary" variant="contained">
+          <Button color="primary" variant="contained" onClick={handleAddNew}>
             Save Note
           </Button>
           <Button
