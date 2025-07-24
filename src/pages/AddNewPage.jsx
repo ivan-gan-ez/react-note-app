@@ -14,10 +14,12 @@ import {
 import Editor from "react-simple-wysiwyg";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router";
+import { useNavigate } from "react-router";
 import { nanoid } from "nanoid";
 import { toast } from "sonner";
 
 function AddNewPage() {
+  const navigate = useNavigate();
   const categoriesInLocalStorage = localStorage.getItem("categories");
   const [categories, setCategories] = useState(
     categoriesInLocalStorage ? JSON.parse(categoriesInLocalStorage) : []
@@ -53,6 +55,7 @@ function AddNewPage() {
       setCategory("");
       setContent("");
       toast(`Note "${title}" successfully added!`);
+      navigate("/");
     }
   };
 
